@@ -18,8 +18,10 @@ function execute() {
 
     # verify composer is installed, prioritize local composer.phar
     if [ -f "./composer.phar" ]; then
-        COMPOSER="./composer.phar"
+        COMPOSER="php ./composer.phar"
+        echo $COMPOSER
     else
+        echo $PWD
         if [ -z "$COMPOSER" ]; then 
             echo "composer not found, please install composer or place composer.phar in Magento webroot directory";
             exit;
