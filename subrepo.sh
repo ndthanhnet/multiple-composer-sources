@@ -82,11 +82,18 @@ function execute() {
         $COMPOSER update --no-interaction
     fi
 
+    # go back to webroot
     cd ../..
 
     # install packages to webroot directory
-    echo "Prepartion done, please install packages to webroot directory using below command"
-    echo "$COMPOSER require $PACKAGES"
+    for PACKAGE in $PACKAGES
+    do
+        if $GREP -q $PACKAGE "./composer.json"; then
+            echo "$PACKAGE verified"
+        else
+            $COMPOSER require $PACKAGE --no-interaction
+        fi
+    done
 }
 
 execute $@
