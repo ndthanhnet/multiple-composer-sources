@@ -7,3 +7,10 @@ This utility helps you to install packages from same domain using multiple usern
 ## How it works
 - It create a directory name `local-src` in Webroot directory
 - 
+
+## Installation
+- cd to project webroot directory
+- execute below command 
+```
+curl -o- https://raw.githubusercontent.com/ndthanhnet/multiple-composer-sources/main/install.sh | bash  -s -- arg1 arg2
+```

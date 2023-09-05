@@ -1,2 +1,3 @@
 # !/bin/bash
-echo "test"
+echo "Param1 $1"
+echo "Param2 $2"
