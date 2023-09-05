@@ -16,15 +16,15 @@ function execute() {
         exit;
     fi
 
-    # verify composer is installed
-    if [ -z "$COMPOSER" ]; then 
-        if [ -f "./composer.phar" ]; then
-            COMPOSER="./composer.phar"
-        else
+    # verify composer is installed, prioritize local composer.phar
+    if [ -f "./composer.phar" ]; then
+        COMPOSER="./composer.phar"
+    else
+        if [ -z "$COMPOSER" ]; then 
             echo "composer not found, please install composer or place composer.phar in Magento webroot directory";
             exit;
-        fi  
-    fi
+        fi
+    fi  
 
     # create local-src if not exist
     if [ ! -d "$LOCALSRC" ]; then

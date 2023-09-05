@@ -12,15 +12,15 @@ function execute() {
     shift 3
     PACKAGES=$@
 
-    # try to locate composer again
-    if [ -z "$COMPOSER" ]; then 
-        if [ -f "./composer.phar" ]; then
-            COMPOSER="./composer.phar"
-        else
+    # verify composer is installed, prioritize local composer.phar
+    if [ -f "./composer.phar" ]; then
+        COMPOSER="./composer.phar"
+    else
+        if [ -z "$COMPOSER" ]; then 
             echo "composer not found, please install composer or place composer.phar in Magento webroot directory";
             exit;
-        fi  
-    fi
+        fi
+    fi  
 
     # make sure PACKAGES is not empty
     if [ -z "$PACKAGES" ]; then
