@@ -7,11 +7,9 @@ GREP="$(which grep)"
 # include parts for environment initialization
 function execute() {
     SUBDIR=$1
-    shift
     PUBLIC_KEY=$2
-    shift
     PRIVATE_KEY=$3
-    shift
+    shift 3
     PACKAGES=$@
 
     # try to locate composer again
