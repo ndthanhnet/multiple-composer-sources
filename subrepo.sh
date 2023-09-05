@@ -12,9 +12,16 @@ function execute() {
     shift 3
     PACKAGES=$@
 
+    # crate sub dir if not exist
+    if [ ! -d "$DIR/$SUBDIR" ]; then
+        mkdir -p $DIR/$SUBDIR
+    fi
+
     # verify composer is installed, prioritize local composer.phar
     if [ -f "./composer.phar" ]; then
-        COMPOSER="./composer.phar"
+        COMPOSER="php ./composer.phar"
+        # copy composer.phar to sub dir so it can be used in sudirectories
+        cp ./composer.phar $DIR/$SUBDIR/
     else
         if [ -z "$COMPOSER" ]; then 
             echo "composer not found, please install composer or place composer.phar in Magento webroot directory";
@@ -26,11 +33,6 @@ function execute() {
     if [ -z "$PACKAGES" ]; then
         echo "no packages given, please provide packages to install";
         exit;
-    fi
-
-    # crate sub dir if not exist
-    if [ ! -d "$DIR/$SUBDIR" ]; then
-        mkdir -p $DIR/$SUBDIR
     fi
 
     cd $DIR/$SUBDIR
@@ -81,6 +83,9 @@ function execute() {
     fi
 
     cd ../..
+
+    # install packages to webroot directory
+    $COMPOSER require $PACKAGES --no-interaction --no-update
 }
 
 execute $@
