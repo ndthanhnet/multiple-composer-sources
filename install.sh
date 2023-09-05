@@ -43,7 +43,9 @@ function execute() {
     fi
 
     # configure local src repository and pre-install-cmd for webroot composer.json
+    echo "$COMPOSER config repositories.local-src path \"local-src/$SUBDIR/vendor/*/*\""
     $COMPOSER config repositories.local-src path "local-src/$SUBDIR/vendor/*/*"
+    echo "$COMPOSER config scripts.pre-install-cmd \"bash local-src/subrepo.sh $SUBDIR $PUBLIC_KEY $PRIVATE_KEY $PACKAGES\""
     $COMPOSER config scripts.pre-install-cmd "bash local-src/subrepo.sh $SUBDIR $PUBLIC_KEY $PRIVATE_KEY $PACKAGES"
 }
 
