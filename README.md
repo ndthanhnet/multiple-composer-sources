@@ -17,10 +17,13 @@ This utility helps you to install packages from same domain using multiple usern
 ```
 curl -o- https://raw.githubusercontent.com/ndthanhnet/multiple-composer-sources/main/install.sh | bash  -s -- arg_subdir arg_public_key arg_private_key arg_packages
 ```
-arg_subdir :  name of sub directory under `local-src`
-arg_public_key : public key of the other Magento 2 Marketplace account
-arg_private_key : private key of the other Magento 2 Marketplace account
-arg_packages : list of packages to install, separate by space
+
+Arguments : 
+
+- arg_subdir :  name of sub directory under `local-src`
+- arg_public_key : public key of the other Magento 2 Marketplace account
+- arg_private_key : private key of the other Magento 2 Marketplace account
+- arg_packages : list of packages to install, separate by space
 
 example 
 ```
