@@ -58,7 +58,7 @@ function execute() {
     for PACKAGE in $PACKAGES
     do
         if $GREP -q $PACKAGE "./composer.json"; then
-            echo "$PACKAGE exists"
+            echo "$PACKAGE verified in $DIR/$SUBDIR/composer.json"
         else
             $COMPOSER require $PACKAGE --no-interaction --no-update
         fi
@@ -89,7 +89,7 @@ function execute() {
     for PACKAGE in $PACKAGES
     do
         if $GREP -q $PACKAGE "./composer.json"; then
-            echo "$PACKAGE verified"
+            echo "$PACKAGE verified in webroot"
         else
             $COMPOSER require $PACKAGE --no-interaction
         fi
