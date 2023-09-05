@@ -85,7 +85,8 @@ function execute() {
     cd ../..
 
     # install packages to webroot directory
-    $COMPOSER require $PACKAGES --no-interaction --no-update
+    echo "Prepartion done, please install packages to webroot directory using below command"
+    echo "$COMPOSER require $PACKAGES"
 }
 
 execute $@
