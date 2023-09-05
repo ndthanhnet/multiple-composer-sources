@@ -19,8 +19,8 @@ function execute() {
     fi
 
     # create local-src if not exist
-    if [ ! -d "./$LOCALSRC" ]; then
-        mkdir -p $LOCALSRC
+    if [ ! -d "$DIR/$LOCALSRC" ]; then
+        mkdir -p $DIR/$LOCALSRC
     fi
 
     # make sure PACKAGES is not empty
