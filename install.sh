@@ -1,11 +1,9 @@
 # !/bin/bash
-# manage sub repositories with givent key and packages
-DIR="${BASH_SOURCE%/*}"
 COMPOSER="$(which composer)"
 
 # include parts for environment initialization
 function execute() {
-    LOCALSRC='local-src'
+    LOCALSRC='./local-src'
     SUBDIR=$1
     PUBLIC_KEY=$2
     PRIVATE_KEY=$3
@@ -18,9 +16,19 @@ function execute() {
         exit;
     fi
 
+    # verify composer is installed
+    if [ -z "$COMPOSER" ]; then 
+        if [ -f "./composer.phar" ]; then
+            COMPOSER="./composer.phar"
+        else
+            echo "composer not found, please install composer or place composer.phar in Magento webroot directory";
+            exit;
+        fi  
+    fi
+
     # create local-src if not exist
-    if [ ! -d "$DIR/$LOCALSRC" ]; then
-        mkdir -p $DIR/$LOCALSRC
+    if [ ! -d "$LOCALSRC" ]; then
+        mkdir -p $LOCALSRC
     fi
 
     # make sure PACKAGES is not empty
@@ -30,8 +38,8 @@ function execute() {
     fi
 
     # download subrepo.sh
-    if [ ! -f "$DIR/$LOCALSRC/subrepo.sh" ]; then
-        curl -o $DIR/$LOCALSRC/subrepo.sh https://raw.githubusercontent.com/ndthanhnet/multiple-composer-sources/main/subrepo.sh
+    if [ ! -f "$LOCALSRC/subrepo.sh" ]; then
+        curl -o $LOCALSRC/subrepo.sh https://raw.githubusercontent.com/ndthanhnet/multiple-composer-sources/main/subrepo.sh
     fi
 
     # configure local src repository and pre-install-cmd for webroot composer.json
