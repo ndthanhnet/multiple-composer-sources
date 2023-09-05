@@ -22,6 +22,12 @@ function execute() {
         fi  
     fi
 
+    # make sure PACKAGES is not empty
+    if [ -z "$PACKAGES" ]; then
+        echo "no packages given, please provide packages to install";
+        exit;
+    fi
+
     # crate sub dir if not exist
     if [ ! -d "$DIR/$SUBDIR" ]; then
         mkdir -p $DIR/$SUBDIR
@@ -37,7 +43,7 @@ function execute() {
         $COMPOSER init --no-interaction --name="$SUBDIR/repo" --description="$SUBDIR repository with different key" --stability="dev" --repository="https://repo.magento.com/"
     fi
 
-    # init auth.json
+    # init auth.json for repo.magento.com
     if [ -f "./auth.json" ]; then
         echo "$DIR/$SUBDIR/auth.json exists"
     else
@@ -75,11 +81,6 @@ function execute() {
     fi
 
     cd ../..
-
-    # configure local src
-    #cd ../..
-    #$COMPOSER config repositories.local-src path "local-src/$SUBDIR/vendor/*/*"
-    #$COMPOSER config scripts.pre-install-cmd "bash local-src/subrepo.sh jajuma d8cf8882e7e04b12631a2c16f43c02b0 3adc070b740237aefc90c61ff7c407e0 jajuma/bfcache jajuma/pagepreload jajuma/assetpreload"
 }
 
 execute $@
