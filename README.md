@@ -5,7 +5,7 @@ This utility helps you to install packages from same domain using multiple usern
 - Using multiple Magento 2 marketplace accounts with composer in the same installation
 
 ## How it works
-- It create a directory name `local-src` in Webroot directory if not exist
+- It creates a directory name `local-src` in Webroot directory if not exist
 - download subrepo.sh script to `local-src/`
 - configure webroot composer.json to support package installation from `local-src` and configure composer [scripts.pre-install-cmd](https://getcomposer.org/doc/articles/scripts.md#command-events) to run subrepo.sh script prior to `composer install`
 - subrepo.sh script will create sub directory under `local-src` and download packages there using the other Magento 2 marketplace account
